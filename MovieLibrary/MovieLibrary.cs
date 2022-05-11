@@ -14,10 +14,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            foreach (var movie in movies)
-            {
-                yield return movie;
-            }
+            return movies.OneAtATime();
         }
 
         public void add(Movie movie)
