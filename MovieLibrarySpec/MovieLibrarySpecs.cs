@@ -120,7 +120,7 @@ namespace TrainingPrep.specs
 
         [Subject(typeof(MovieLibrary))]
         public class when_trying_to_change_the_set_of_movies_returned_by_the_movie_library_to_a_mutable_type :
-            movie_library_concern
+    movie_library_concern
         {
             static Movie first_movie;
             static Movie second_movie;
