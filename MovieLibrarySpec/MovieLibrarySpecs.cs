@@ -142,5 +142,32 @@ namespace TrainingPrep.specs
             static Exception exception_thrown_by_the_subject;
         }
 
+        public class when_trying_to_iterate_over_the_set_of_movies_returned_by_the_movie_library_to_a_mutable_type :
+            movie_library_concern
+        {
+            static Movie first_movie;
+            static Movie second_movie;
+
+            Establish context = () =>
+            {
+                first_movie = new Movie();
+                second_movie = new Movie();
+                movie_collection.add_all(first_movie, second_movie);
+            };
+
+            Because of = () =>
+                x = subject.all_movies();
+
+            private It should_get_an_invalid_cast_exception = () =>
+            {
+                foreach (var m in x)
+                {
+                    
+                }
+            };
+
+            static Exception exception_thrown_by_the_subject;
+            private static IEnumerable<Movie> x;
+        }
     }
 }
