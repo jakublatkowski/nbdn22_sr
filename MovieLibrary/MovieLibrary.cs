@@ -14,7 +14,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            return movies.OneAtATime();
+            return new ReadOnlySetOf<Movie>(movies);
         }
 
         public void add(Movie movie)
