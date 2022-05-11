@@ -19,15 +19,9 @@ namespace TrainingPrep.collections
 
         public void add(Movie movie)
         {
+            if (!movies.Contains(movie))
+                movies.Add(movie);
 
-
-            foreach (var m in movies)
-            {
-                if (m.title==movie.title)
-                    return;
-            }
-
-            movies.Add(movie);
         }
     }
 }
