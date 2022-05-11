@@ -19,6 +19,15 @@ namespace TrainingPrep.collections
 
         public void add(Movie movie)
         {
+
+
+            foreach (var m in movies)
+            {
+                if (m.title==movie.title)
+                    return;
+            }
+
+            movies.Add(movie);
         }
     }
 }
