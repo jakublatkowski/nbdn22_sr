@@ -34,7 +34,7 @@ namespace TrainingPrep.collections
         }
         public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            return movies.ThatSatisfy(movie => movie.production_studio == ProductionStudio.Pixar);
+            return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.Pixar));
 
         }
 
