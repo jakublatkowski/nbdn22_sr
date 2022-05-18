@@ -44,7 +44,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
         {
-            return movies.ThatSatisfy(new Negation(Movie.IsPublishedBy(ProductionStudio.Pixar)));
+            return movies.ThatSatisfy(new Negation<Movie>(Movie.IsPublishedBy(ProductionStudio.Pixar)));
         }
 
         public IEnumerable<Movie> all_movies_published_after(int year)
@@ -64,7 +64,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_action_movies()
         {
-            return movies.ThatSatisfy(m => m.genre == Genre.action);
+            return movies.ThatSatisfy(Movie.IsOfGenre(Genre.action));
         }
 
         public IEnumerable<Movie> all_kid_movies_published_after(int year)
@@ -80,6 +80,21 @@ namespace TrainingPrep.collections
         public IEnumerable<Movie> all_movies_published_by_disney()
         {
             return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.Disney));
+        }
+    }
+
+    public class Negation<TItem> : Criteria<TItem>
+    {
+        private readonly Criteria<TItem> _criteriaToNegate;
+
+        public Negation(Criteria<TItem> criteriaToNegate)
+        {
+            _criteriaToNegate = criteriaToNegate;
+        }
+
+        public bool IsSatisfiedBy(TItem item)
+        {
+            return !_criteriaToNegate.IsSatisfiedBy(item);
         }
     }
 }

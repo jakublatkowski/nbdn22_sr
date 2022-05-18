@@ -254,6 +254,14 @@ namespace TrainingPrep.specs
 
                 results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean, the_ring);
             };
+
+            It should_be_able_to_find_MGM_Or_comedy = () =>
+            {
+                var results = subject.all_MGM_or_comedy();
+
+                results.ShouldContainOnly(the_ring, theres_something_about_mary);
+            };
+
         }
 
         public abstract class concern_for_searching_and_sorting : movie_library_concern
