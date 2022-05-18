@@ -81,6 +81,25 @@ namespace TrainingPrep.collections
         {
             return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.Disney));
         }
+
+        public IEnumerable<Movie> all_MGM_or_comedy()
+        {
+            return movies.ThatSatisfy(new Alternative(Movie.IsPublishedBy(ProductionStudio.MGM),
+                Movie.IsOfGenre(Genre.comedy)));
+        }
+    }
+
+    public class Alternative : Criteria<Movie>
+    {
+        public Alternative(Criteria<Movie> isPublishedBy, Criteria<Movie> isOfGenre)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsSatisfiedBy(Movie item)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Negation<TItem> : Criteria<TItem>
