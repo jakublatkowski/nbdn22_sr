@@ -39,5 +39,30 @@ namespace TrainingPrep.collections
         public Genre genre { get; set; }
         public int rating { get; set; }
         public DateTime date_published { get; set; }
+
+        public static Predicate<Movie> IsPublishedBy(ProductionStudio productionStudio)
+        {
+            return movie => movie.production_studio == productionStudio;
+        }
+
+        public static Predicate<Movie> IsNotBublishedBy(ProductionStudio productionStudio)
+        {
+            return m => m.production_studio != productionStudio;
+        }
+
+        public static Predicate<Movie> IsPublishedAfter(int year)
+        {
+            return m => m.date_published.Year > year;
+        }
+
+        public static Predicate<Movie> IsPublishedBetween(int startYear, int endYear)
+        {
+            return m => m.date_published.Year >= startYear && m.date_published.Year <= endYear;
+        }
+
+        public static Predicate<Movie> IsGenreOf(Genre Genre)
+        {
+            return m => m.genre == Genre;
+        }
     }
 }

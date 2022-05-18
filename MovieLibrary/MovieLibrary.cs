@@ -34,7 +34,7 @@ namespace TrainingPrep.collections
         }
         public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            return movies.ThatSatisfy(movie => movie.production_studio == ProductionStudio.Pixar);
+            return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.Pixar));
 
         }
 
@@ -45,22 +45,22 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
         {
-            return movies.ThatSatisfy(m => m.production_studio != ProductionStudio.Pixar);
+            return movies.ThatSatisfy(Movie.IsNotBublishedBy(ProductionStudio.Pixar));
         }
 
         public IEnumerable<Movie> all_movies_published_after(int year)
         {
-            return movies.ThatSatisfy(m => m.date_published.Year > year);
+            return movies.ThatSatisfy(Movie.IsPublishedAfter(year));
         }
 
         public IEnumerable<Movie> all_movies_published_between_years(int startYear, int endYear)
         {
-            return movies.ThatSatisfy(m => m.date_published.Year >= startYear && m.date_published.Year <= endYear);
+            return movies.ThatSatisfy(Movie.IsPublishedBetween(startYear, endYear));
         }
 
         public IEnumerable<Movie> all_kid_movies()
         {
-            return movies.ThatSatisfy(m => m.genre == Genre.kids);
+            return movies.ThatSatisfy(Movie.IsGenreOf(Genre.kids));
         }
 
         public IEnumerable<Movie> all_action_movies()
