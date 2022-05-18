@@ -198,21 +198,21 @@ namespace TrainingPrep.specs
 
                 results.ShouldContainOnly(a_bugs_life, pirates_of_the_carribean, cars);
             };
-            [Ignore("Will be implemented next")]
+
             It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
             {
                 var results = subject.all_movies_not_published_by_pixar();
 
                 results.ShouldNotContain(cars, a_bugs_life);
             };
-            [Ignore("Will be implemented next")]
+
             It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
             {
                 var results = subject.all_movies_published_after(2004);
 
                 results.ShouldContainOnly(the_ring, shrek, theres_something_about_mary);
             };
-            [Ignore("Will be implemented next")]
+   
             It should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
             {
                 var results = subject.all_movies_published_between_years(1982, 2003);
@@ -220,7 +220,7 @@ namespace TrainingPrep.specs
                 results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, a_bugs_life, pirates_of_the_carribean);
             };
 
-            [Ignore("Will be implemented next")]
+
             It should_be_able_to_find_all_kid_movies = () =>
             {
                 var results = subject.all_kid_movies();
@@ -228,7 +228,6 @@ namespace TrainingPrep.specs
                 results.ShouldContainOnly(a_bugs_life, shrek, cars);
             };
 
-            [Ignore("Will be implemented next")]
             It should_be_able_to_find_all_action_movies = () =>
             {
                 var results = subject.all_action_movies();
@@ -237,7 +236,6 @@ namespace TrainingPrep.specs
             };
 
 
-            [Ignore("Will be implemented next")]
             It should_be_able_to_find_recient_kid_movies = () =>
             {
                 var results = subject.all_kid_movies_published_after(2003);
@@ -245,7 +243,6 @@ namespace TrainingPrep.specs
                 results.ShouldContainOnly(shrek, cars);
             };
 
-            [Ignore("Will be implemented next")]
             It should_be_able_to_find_horror_Or_actionmovies = () =>
             {
                 var results = subject.all_horror_or_action();
