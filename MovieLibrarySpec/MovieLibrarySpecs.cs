@@ -205,7 +205,12 @@ namespace TrainingPrep.specs
 
                 results.ShouldNotContain(cars, a_bugs_life);
             };
+            It should_be_able_to_find_all_movies_published_by_disney = () =>
+            {
+                var results = subject.all_movies_published_by_disney();
 
+                results.ShouldContain(cars, a_bugs_life);
+            };
             It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
             {
                 var results = subject.all_movies_published_after(2004);

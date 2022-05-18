@@ -42,11 +42,6 @@ namespace TrainingPrep.collections
         public int rating { get; set; }
         public DateTime date_published { get; set; }
 
-        public static Predicate<Movie> IsPublishedBy(ProductionStudio productionStudio)
-        {
-            return movie => movie.production_studio == productionStudio;
-        }
-
         public static Predicate<Movie> IsNotBublishedBy(ProductionStudio productionStudio)
         {
             return m => m.production_studio != productionStudio;
