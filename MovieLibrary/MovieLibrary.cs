@@ -80,7 +80,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies_published_by_disney()
         {
-            throw new NotImplementedException();
+            return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.Disney));
         }
     }
 }

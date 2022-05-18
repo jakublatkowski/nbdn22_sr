@@ -61,5 +61,31 @@ namespace TrainingPrep.collections
         {
             return m=>((IList)genre).Contains(m.genre);
         }
+
+        public static Criteria<Movie> IsPublishedBy(ProductionStudio disney)
+        {
+            return new PublishedCriteria(disney);
+        }
+    }
+
+    public class PublishedCriteria : Criteria<Movie>
+    {
+        private readonly ProductionStudio _studio;
+
+        public PublishedCriteria(ProductionStudio studio)
+        {
+            _studio = studio;
+        }
+
+        public bool IsSatisfiedBy(Movie item)
+        {
+            return item.production_studio == _studio;
+        }
+    }
+
+    public interface Criteria<TItem>
+    {
+        public bool IsSatisfiedBy(TItem item);
+
     }
 }

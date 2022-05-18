@@ -209,7 +209,7 @@ namespace TrainingPrep.specs
             {
                 var results = subject.all_movies_published_by_disney();
 
-                results.ShouldContain(cars, a_bugs_life);
+                results.ShouldContain(pirates_of_the_carribean);
             };
             It should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
             {
