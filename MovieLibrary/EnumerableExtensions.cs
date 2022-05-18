@@ -39,6 +39,6 @@ public class AnonymousCriteria<T>:Criteria<T>
 
     public bool IsSatisfiedBy(T item)
     {
-        throw new NotImplementedException();
+        return _condition(item);
     }
 }
