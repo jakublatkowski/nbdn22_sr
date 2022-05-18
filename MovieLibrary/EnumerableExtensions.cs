@@ -14,22 +14,31 @@ public static class EnumerableExtensions
 
     public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> items, Predicate<TItem> condition)
     {
+        return items.ThatSatisfy(new AnonymousCriteria<TItem>(condition));
+    }
+    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> items, Criteria<TItem> criteria)
+    {
         foreach (var item in items)
         {
-            if (condition(item))
+            if (criteria.IsSatisfiedBy(item))
             {
                 yield return item;
             }
         }
     }
-    public static IEnumerable<TItem> ThatSatisfy<TItem>(this IEnumerable<TItem> items, Criteria<TItem> condition)
+}
+
+public class AnonymousCriteria<T>:Criteria<T>
+{
+    private readonly Predicate<T> _condition;
+
+    public AnonymousCriteria(Predicate<T> condition)
     {
-        foreach (var item in items)
-        {
-            if (condition.IsSatisfiedBy(item))
-            {
-                yield return item;
-            }
-        }
+        _condition = condition;
+    }
+
+    public bool IsSatisfiedBy(T item)
+    {
+        throw new NotImplementedException();
     }
 }
