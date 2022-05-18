@@ -39,7 +39,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
         {
-            return movies.ThatSatisfy(movie => movie.production_studio == ProductionStudio.Pixar || movie.production_studio == ProductionStudio.Disney);
+            return movies.ThatSatisfy(new Alternative<Movie>(Movie.IsPublishedBy(ProductionStudio.Pixar),Movie.IsPublishedBy(ProductionStudio.Disney)));
         }
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
@@ -119,7 +119,7 @@ namespace TrainingPrep.collections
 
         public bool IsSatisfiedBy(Movie item)
         {
-            return _criteria1.IsSatisfiedBy(item) || _criteria1.IsSatisfiedBy(item);
+            return _criteria1.IsSatisfiedBy(item) || _criteria2.IsSatisfiedBy(item);
         }
     }
 
