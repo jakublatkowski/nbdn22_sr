@@ -60,7 +60,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_kid_movies()
         {
-            return movies.ThatSatisfy(Movie.IsGenreOf(Genre.kids));
+            return movies.ThatSatisfy(Movie.IsOfGenre(Genre.kids));
         }
 
         public IEnumerable<Movie> all_action_movies()
@@ -75,7 +75,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_horror_or_action()
         {
-            return movies.ThatSatisfy(m => m.genre == Genre.action || m.genre == Genre.horror);
+            return movies.ThatSatisfy(Movie.IsOfGenre(Genre.action, Genre.horror));
         }
     }
 }

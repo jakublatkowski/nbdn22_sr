@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace TrainingPrep.collections
 {
@@ -60,9 +62,9 @@ namespace TrainingPrep.collections
             return m => m.date_published.Year >= startYear && m.date_published.Year <= endYear;
         }
 
-        public static Predicate<Movie> IsGenreOf(Genre Genre)
+        public static Predicate<Movie> IsOfGenre(params Genre[] genre)
         {
-            return m => m.genre == Genre;
+            return m=>((IList)genre).Contains(m.genre);
         }
     }
 }
