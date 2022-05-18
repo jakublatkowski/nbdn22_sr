@@ -69,7 +69,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_kid_movies_published_after(int year)
         {
-            return movies.ThatSatisfy(m => m.genre == Genre.kids && m.date_published.Year > year);
+            return movies.ThatSatisfy(new Conjunction(Movie.IsOfGenre(Genre.kids),Movie.IsPublishedAfter(year)));
         }
 
         public IEnumerable<Movie> all_horror_or_action()
@@ -84,21 +84,42 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_MGM_or_comedy()
         {
-            return movies.ThatSatisfy(new Alternative(Movie.IsPublishedBy(ProductionStudio.MGM),
+            return movies.ThatSatisfy(new Alternative<Movie>(Movie.IsPublishedBy(ProductionStudio.MGM),
                 Movie.IsOfGenre(Genre.comedy)));
         }
     }
 
-    public class Alternative : Criteria<Movie>
+    public class Conjunction : Criteria<Movie>
     {
-        public Alternative(Criteria<Movie> isPublishedBy, Criteria<Movie> isOfGenre)
+        private readonly Criteria<Movie> _criteria1;
+        private readonly Criteria<Movie> _criteria2;
+
+        public Conjunction(Criteria<Movie> criteria1, Criteria<Movie> criteria2)
         {
-            throw new NotImplementedException();
+            _criteria1 = criteria1;
+            _criteria2 = criteria2;
         }
 
         public bool IsSatisfiedBy(Movie item)
         {
-            throw new NotImplementedException();
+            return _criteria1.IsSatisfiedBy(item) && _criteria2.IsSatisfiedBy(item);
+        }
+    }
+
+    public class Alternative<Movie> : Criteria<Movie>
+    {
+        private readonly Criteria<Movie> _criteria1;
+        private readonly Criteria<Movie> _criteria2;
+
+        public Alternative(Criteria<Movie> criteria1, Criteria<Movie> criteria2)
+        {
+            _criteria1 = criteria1;
+            _criteria2 = criteria2;
+        }
+
+        public bool IsSatisfiedBy(Movie item)
+        {
+            return _criteria1.IsSatisfiedBy(item) || _criteria1.IsSatisfiedBy(item);
         }
     }
 
