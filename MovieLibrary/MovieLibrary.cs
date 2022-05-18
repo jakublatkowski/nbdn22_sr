@@ -69,7 +69,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_kid_movies_published_after(int year)
         {
-            return movies.ThatSatisfy(new Conjunction(Movie.IsOfGenre(Genre.kids),Movie.IsPublishedAfter(year)));
+            return movies.ThatSatisfy(new Conjunction<Movie>(Movie.IsOfGenre(Genre.kids),Movie.IsPublishedAfter(year)));
         }
 
         public IEnumerable<Movie> all_horror_or_action()
@@ -89,35 +89,40 @@ namespace TrainingPrep.collections
         }
     }
 
-    public class Conjunction : Criteria<Movie>
+    public abstract class BinaryCriteria<TItem> : Criteria<TItem>
     {
-        private readonly Criteria<Movie> _criteria1;
-        private readonly Criteria<Movie> _criteria2;
+        protected Criteria<TItem> _criteria1;
+        protected Criteria<TItem> _criteria2;
 
-        public Conjunction(Criteria<Movie> criteria1, Criteria<Movie> criteria2)
+        public BinaryCriteria(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
         {
             _criteria1 = criteria1;
             _criteria2 = criteria2;
         }
 
-        public bool IsSatisfiedBy(Movie item)
+        public abstract bool IsSatisfiedBy(TItem item);
+    }
+
+    public class Conjunction<TItem> : BinaryCriteria<TItem>
+    {
+        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2) : base(criteria1, criteria2)
+        {
+        }
+
+        public override bool IsSatisfiedBy(TItem item)
         {
             return _criteria1.IsSatisfiedBy(item) && _criteria2.IsSatisfiedBy(item);
         }
     }
 
-    public class Alternative<Movie> : Criteria<Movie>
+    public class Alternative<Movie> : BinaryCriteria<Movie>
     {
-        private readonly Criteria<Movie> _criteria1;
-        private readonly Criteria<Movie> _criteria2;
 
-        public Alternative(Criteria<Movie> criteria1, Criteria<Movie> criteria2)
+        public Alternative(Criteria<Movie> criteria1, Criteria<Movie> criteria2) : base(criteria1,criteria2)
         {
-            _criteria1 = criteria1;
-            _criteria2 = criteria2;
         }
 
-        public bool IsSatisfiedBy(Movie item)
+        public override bool IsSatisfiedBy(Movie item)
         {
             return _criteria1.IsSatisfiedBy(item) || _criteria2.IsSatisfiedBy(item);
         }
