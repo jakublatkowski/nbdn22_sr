@@ -350,3 +350,29 @@ namespace TrainingPrep.specs
         }
     }
 }
+
+namespace TrainingPrep.specs.MovieLibrarySpecs
+{
+    internal class Where_Movie  
+    {
+        public static CriteriaBuilder HasAn(Func<Movie, ProductionStudio> selector)
+        {
+            return new CriteriaBuilder(selector);
+        }
+    }
+
+    internal class CriteriaBuilder
+    {
+        private readonly Func<Movie, ProductionStudio> _selector;
+
+        public CriteriaBuilder(Func<Movie, ProductionStudio> selector)
+        {
+            _selector = selector;
+        }
+
+        public Criteria<Movie> EqualTo(ProductionStudio studio)
+        {
+            return new AnonymousCriteria<Movie>(movie => _selector(movie) == studio);
+        }
+    }
+}
