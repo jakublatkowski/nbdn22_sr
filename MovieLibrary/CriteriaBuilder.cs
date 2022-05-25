@@ -1,9 +1,9 @@
 using System;
 using TrainingPrep.collections;
 
-namespace TrainingPrep.specs.MovieLibrarySpecs
+namespace TrainingPrep.collections
 {
-    public class CriteriaBuilder<TItem, TProperty>
+    public class CriteriaBuilder<TItem, TProperty> where TProperty : IComparable<TProperty>
     {
         private readonly Func<TItem, TProperty> _selector;
 
@@ -15,6 +15,11 @@ namespace TrainingPrep.specs.MovieLibrarySpecs
         public Criteria<TItem> EqualTo(TProperty property)
         {
             return new AnonymousCriteria<TItem>(movie => _selector(movie).Equals(property));
+        }
+
+        public Criteria<TItem> GreaterThan(TProperty property)
+        {
+            return new AnonymousCriteria<TItem>(movie => _selector(movie).CompareTo(property)>0);
         }
     }
 }
