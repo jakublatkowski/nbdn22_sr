@@ -7,16 +7,19 @@ namespace TrainingPrep.collections
         public readonly Func<TItem, TProperty> _selector;
         public bool _negation;
 
-        public SelectorHolder(Func<TItem, TProperty> selector)
+        public SelectorHolder(Func<TItem, TProperty> selector): this(selector, false)
         {
-            _negation = false;
+        }
+
+        private SelectorHolder(Func<TItem, TProperty> selector, bool negation) 
+        {
             _selector = selector;
+            _negation = negation;
         }
 
         public SelectorHolder<TItem,TProperty> Not()
         {
-            _negation = !_negation;
-            return this;
+            return new SelectorHolder<TItem, TProperty>(_selector,!_negation);
         }
     }
 }

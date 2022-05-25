@@ -7,13 +7,14 @@ public static class CriteriaBuilderExtensions
     {
         return new AnonymousCriteria<TItem>(movie =>
         {
+            var equals = selectorHolder._selector(movie).Equals(property);
             if (selectorHolder._negation)
             {
-                return !selectorHolder._selector(movie).Equals(property);
+                return !equals;
             }
             else
             {
-                return selectorHolder._selector(movie).Equals(property);
+                return equals;
             }
         });
     }

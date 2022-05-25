@@ -207,6 +207,16 @@ namespace TrainingPrep.specs
 
                 results.ShouldNotContain(cars, a_bugs_life);
             };
+            private It should_be_reasonable = () =>
+            {
+                var negatedBuilder = Where<Movie>.HasAn(m => m.production_studio).Not();
+                var criteria = negatedBuilder.EqualTo(ProductionStudio.Pixar);
+                var results = subject.all_movies().ThatSatisfy(criteria);
+                var criteria1 = negatedBuilder.Not().EqualTo(ProductionStudio.Disney);
+
+                results.ShouldNotContain(cars, a_bugs_life);
+            };
+
             It should_be_able_to_find_all_movies_published_by_disney = () =>
             {
                 var results = subject.all_movies_published_by_disney();
