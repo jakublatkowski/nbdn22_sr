@@ -172,9 +172,10 @@ namespace TrainingPrep.specs
         [Subject(typeof(MovieLibrary))]
         public class when_searching_for_movies : concern_for_searching_and_sorting
         {
-            It should_be_able_to_find_all_movies_published_by_pixar = () =>
+            private It should_be_able_to_find_all_movies_published_by_pixar = () =>
             {
-                var results = subject.all_movies_published_by_pixar();
+                Criteria<Movie> criteria = Where_Movie.HasAn(m => m.production_studio).EqualTo(ProductionStudio.Pixar);
+                var results = subject.all_movies().ThatSatisfy(criteria);
 
                 results.ShouldContainOnly(cars, a_bugs_life);
             };
