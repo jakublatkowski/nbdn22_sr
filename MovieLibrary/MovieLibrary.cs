@@ -39,7 +39,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
         {
-            return movies.ThatSatisfy(new Alternative<Movie>(Movie.IsPublishedBy(ProductionStudio.Pixar),Movie.IsPublishedBy(ProductionStudio.Disney)));
+            return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.Pixar).Or(Movie.IsPublishedBy(ProductionStudio.Disney)));
         }
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
