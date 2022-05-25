@@ -102,44 +102,4 @@ namespace TrainingPrep.collections
 
         public abstract bool IsSatisfiedBy(TItem item);
     }
-
-    public class Conjunction<TItem> : BinaryCriteria<TItem>
-    {
-        public Conjunction(Criteria<TItem> criteria1, Criteria<TItem> criteria2) : base(criteria1, criteria2)
-        {
-        }
-
-        public override bool IsSatisfiedBy(TItem item)
-        {
-            return _criteria1.IsSatisfiedBy(item) && _criteria2.IsSatisfiedBy(item);
-        }
-    }
-
-    public class Alternative<Movie> : BinaryCriteria<Movie>
-    {
-
-        public Alternative(Criteria<Movie> criteria1, Criteria<Movie> criteria2) : base(criteria1,criteria2)
-        {
-        }
-
-        public override bool IsSatisfiedBy(Movie item)
-        {
-            return _criteria1.IsSatisfiedBy(item) || _criteria2.IsSatisfiedBy(item);
-        }
-    }
-
-    public class Negation<TItem> : Criteria<TItem>
-    {
-        private readonly Criteria<TItem> _criteriaToNegate;
-
-        public Negation(Criteria<TItem> criteriaToNegate)
-        {
-            _criteriaToNegate = criteriaToNegate;
-        }
-
-        public bool IsSatisfiedBy(TItem item)
-        {
-            return !_criteriaToNegate.IsSatisfiedBy(item);
-        }
-    }
 }
