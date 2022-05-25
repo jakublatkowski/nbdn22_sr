@@ -3,8 +3,7 @@ using TrainingPrep.collections;
 
 namespace TrainingPrep.collections
 {
-    public class CriteriaBuilder<TItem, TProperty> where TProperty : IComparable<TProperty>
-    {
+    public class CriteriaBuilder<TItem, TProperty> {
         private readonly Func<TItem, TProperty> _selector;
 
         public CriteriaBuilder(Func<TItem, TProperty> selector)
@@ -17,9 +16,9 @@ namespace TrainingPrep.collections
             return new AnonymousCriteria<TItem>(movie => _selector(movie).Equals(property));
         }
 
-        public Criteria<TItem> GreaterThan(TProperty property)
+        public Criteria<TItem> GreaterThan(IComparable<TProperty> property)
         {
-            return new AnonymousCriteria<TItem>(movie => _selector(movie).CompareTo(property)>0);
+            return new AnonymousCriteria<TItem>(movie => property.CompareTo(_selector(movie))<0);
         }
     }
 }
