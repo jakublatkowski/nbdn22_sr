@@ -69,7 +69,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_kid_movies_published_after(int year)
         {
-            return movies.ThatSatisfy(new Conjunction<Movie>(Movie.IsOfGenre(Genre.kids),Movie.IsPublishedAfter(year)));
+            return movies.ThatSatisfy(Movie.IsOfGenre(Genre.kids).And(Movie.IsPublishedAfter(year)));
         }
 
         public IEnumerable<Movie> all_horror_or_action()
@@ -87,19 +87,5 @@ namespace TrainingPrep.collections
             return movies.ThatSatisfy(new Alternative<Movie>(Movie.IsPublishedBy(ProductionStudio.MGM),
                 Movie.IsOfGenre(Genre.comedy)));
         }
-    }
-
-    public abstract class BinaryCriteria<TItem> : Criteria<TItem>
-    {
-        protected Criteria<TItem> _criteria1;
-        protected Criteria<TItem> _criteria2;
-
-        public BinaryCriteria(Criteria<TItem> criteria1, Criteria<TItem> criteria2)
-        {
-            _criteria1 = criteria1;
-            _criteria2 = criteria2;
-        }
-
-        public abstract bool IsSatisfiedBy(TItem item);
     }
 }
