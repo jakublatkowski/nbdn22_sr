@@ -84,8 +84,7 @@ namespace TrainingPrep.collections
 
         public IEnumerable<Movie> all_MGM_or_comedy()
         {
-            return movies.ThatSatisfy(new Alternative<Movie>(Movie.IsPublishedBy(ProductionStudio.MGM),
-                Movie.IsOfGenre(Genre.comedy)));
+            return movies.ThatSatisfy(Movie.IsPublishedBy(ProductionStudio.MGM).Or(Movie.IsOfGenre(Genre.comedy)));
         }
     }
 }
